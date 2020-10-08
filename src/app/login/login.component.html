@@ -1,0 +1,28 @@
+<nav class="navbar navbar-light bg-light">
+        <img src="https://tpconnects.com/wp-content/uploads/2020/03/tpconnects.png" width="200" height="50" alt="">
+    <span class="navbar-brand mb-0 h1">USER SIGN IN</span>
+  </nav>
+  <br>
+  <br>
+<div class='container'>
+<div class='login col-md-6'>
+    <form #signUpForm="ngForm" (ngSubmit)="login()">
+            
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" name="newEmail" [(ngModel)]="newEmail" #email="ngModel"
+                required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type='password' class="form-control" name="newPassword" [(ngModel)]="newPassword"
+                #password='ngModel' placeholder='password' required>
+        </div>
+        
+        
+        <button type="submit" class="btn btn-success" >Sign-in</button>&nbsp;&nbsp;
+        <button type="submit" class="btn btn-primary" (click)="goToSignUp()">Sign-up</button>
+    </form>
+</div>
+</div>
+

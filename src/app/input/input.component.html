@@ -1,0 +1,130 @@
+<div class="container" style="border:solid lightgray;">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+      <img src="https://tpconnects.com/wp-content/uploads/2020/03/tpconnects.png" width="200" height="50" alt="">
+        <a class="navbar-brand">Flights Available</a>
+        <form class="form-inline">
+            <button class="btn btn-success my-2 my-sm-0" 
+            data-toggle="modal" data-target="#flightModal" type="button">Create List</button>&nbsp;&nbsp;
+          <button class="btn btn-success my-2 my-sm-0"
+          data-toggle="modal" data-target="#exampleModal" type="button" [disabled]='buttonCheck'>Create User</button>&nbsp;&nbsp;
+          <button class="btn btn-primary my-2 my-sm-0" (click)='logout()'>LogOut</button>
+        </form>
+      </nav>
+<br>
+
+  <div class="row" style="text-align:center" *ngIf="flightLists">
+    <div *ngFor="let country of flightLists" class="col-md-4" >
+         
+      <div class="card">
+        <div class="card-header"><h5>{{country.countryName}}</h5></div>
+        <div class="card-body">
+         
+            <p>Flights Count: <span style="font-weight: bold;">{{country.flightCount}}</span></p>
+        </div>
+        <div class="card-footer">
+        <button class="btn btn-primary" (click)='deleteList(country.countryId)' [disabled]='buttonCheck'>Delete</button>       
+        </div>       
+      </div>
+
+      <br/>
+    
+  </div> 
+  </div>
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Manager Role</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #userCreateForm="ngForm" (ngSubmit)="createUser()">
+          <div class="form-group">
+              <div class="row">
+                  <div class="col">
+            <label  class="col-form-label">First Name:</label>
+
+            <input class="form-control" type="text" [(ngModel)]="newFirstName" name="newFirstName"
+                        #firstname="ngModel" required>
+                    </div>  
+                    <div class="col">
+                        <label  class="col-form-label">Last Name:</label>
+            
+                        <input class="form-control" type="text" [(ngModel)]="newLastName" name="newLastName"
+                                    #lastname="ngModel" required>
+                                </div>   
+                </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" name="newEmail" [(ngModel)]="newEmail" #email="ngModel"
+                required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type='password' class="form-control" name="newPassword" [(ngModel)]="newPassword"
+                #password='ngModel' placeholder='password' required>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-9">
+                <label>Mobile.No</label>
+               <input type='number' class="form-control" name="newPhoneNo" [(ngModel)]="newPhoneNo"
+                #Phoneno="ngModel" placeholder='Mobile.no' required>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]='!userCreateForm.form.valid' >Create</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="flightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Flight List</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <div class="row">
+                  <div class="col">
+            <label class="col-form-label">Country Name:</label>
+
+            <input class="form-control" type="text" [(ngModel)]="countryName" name="countryName"
+                        #countryNameText="ngModel" required>
+                    </div>  
+                    <div class="col">
+                        <label class="col-form-label">Flight Count:</label>
+            
+                        <input class="form-control" type="text" [(ngModel)]="flightCount" name="flightCount"
+                                    #flightCountText="ngModel" required>
+                                </div>   
+                </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)='createFlightList()'>Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
