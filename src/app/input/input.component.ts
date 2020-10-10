@@ -3,6 +3,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import * as $ from "jquery";
+import { Cookie } from 'ng2-cookies';
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
@@ -18,15 +19,17 @@ public buttonCheck: boolean;
 public countryName: string;
 public flightCount: Number;
 public flightLists: any;
+public authToken: any;
   constructor(public userService: UserService, public toastr: ToastrManager,
     public router: Router) { }
 
   ngOnInit() {
+    this.authToken = Cookie.get('authToken');
     this.buttonStatus();
     this.getAllLists();
   }
 public deleteList = (data) =>{
-  this.userService.deleteFlightList(data).subscribe(
+  this.userService.deleteFlightList(data, this.authToken).subscribe(
 (apiResponse) => {
     if(apiResponse.status == 200){
       this.toastr.successToastr('Deleted Successfully!!');

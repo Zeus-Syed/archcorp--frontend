@@ -55,8 +55,8 @@ return this.http.post(`${this.BaseUrl}/flight/createflight`, data);
     return this.http.get(`${this.BaseUrl}/flight/getall`);
   }
 
-  public deleteFlightList(countryId):Observable<any> {
+  public deleteFlightList(countryId, authToken):Observable<any> {
     let data = {};
-    return this.http.post(`${this.BaseUrl}/flight/delete/${countryId}`, data);
+    return this.http.post(`${this.BaseUrl}/flight/delete/${countryId}/${authToken}`, data);
   }
 }
