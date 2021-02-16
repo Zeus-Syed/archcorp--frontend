@@ -11,13 +11,15 @@ import {FormsModule} from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { UserService } from './user.service';
 import { ToastrModule } from 'ng6-toastr-notifications';
+import { ArchcorpComponent } from './archcorp/archcorp.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ArchcorpComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { ToastrModule } from 'ng6-toastr-notifications';
     RouterModule.forRoot([
       { path: '', component: LoginComponent},
       { path: 'signup', component: SignupComponent},
-      { path: 'landing', component: InputComponent}
+      { path: 'landing', component: InputComponent},
+      { path: 'archcorp', component: ArchcorpComponent}
     ])
   ],
   providers: [UserService],

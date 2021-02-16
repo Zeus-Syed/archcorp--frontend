@@ -1,0 +1,140 @@
+<!-- <div class="container" style="border:solid lightgray;"> -->
+    <nav class="navbar navbar-light bg-light justify-content-between">
+      <img src="https://static1.squarespace.com/static/5f143aa125e29344b4be8e0f/t/5f4742ae8ee0877c452fdc6e/1610880327949/?format=1500w" width="200" height="50" alt="">
+        <a class="navbar-brand">Trakhees/Nakheel Approval Process</a>
+        <form class="form-inline">
+           
+          <button class="btn btn-primary my-2 my-sm-0" (click)='logout()'>LogOut</button>&nbsp;&nbsp;
+        </form>
+      </nav>
+      <nav class="navbar navbar-light bg-light justify-content-between">
+        <!-- <img src="https://static1.squarespace.com/static/5f143aa125e29344b4be8e0f/t/5f4742ae8ee0877c452fdc6e/1610880327949/?format=1500w" width="200" height="50" alt=""> -->
+          <!-- <a class="navbar-brand">Trakhees/Nakheel Approval Process</a> -->
+          <a><select class="btn btn-success" (change)="filterValues($event.target.value)">
+            <option value="">Select Filter Option</option>
+            <option value="authority">Entity</option>
+            <option value="approvals">No of Approvals</option>
+            <option value="rDocs">Required Documents</option>
+            <option value="aDocs">Actual Documents</option>
+            <option value="client">Client</option>
+          </select>&nbsp;&nbsp;  <input type="text" placeholder="search"  [(ngModel)]="search" name="search"
+            #Search="ngModel" ></a>
+         
+          <form class="form-inline">
+              <!-- <button class="btn btn-success my-2 my-sm-0" 
+              data-toggle="modal" data-target="#flightModal" type="button">Create List</button>&nbsp;&nbsp; -->
+            <!-- <button class="btn btn-primary my-2 my-sm-0" (click)='logout()'>LogOut</button> -->
+            <button class="btn btn-success my-2 my-sm-0"
+          data-toggle="modal" data-target="#exampleModal" type="button" [disabled]='buttonCheck'>Create User</button>&nbsp;&nbsp;
+  
+          </form>
+        </nav>
+<br>
+
+  <!-- <div class="row" style="text-align:center" *ngIf="flightLists">
+    <div *ngFor="let country of flightLists" class="col-md-4" > -->
+         
+      <!-- <div class="card">
+        <div class="card-header"><h5>{{country.countryName}}</h5></div>
+        <div class="card-body">
+         
+            <p>Flights Count: <span style="font-weight: bold;">{{country.flightCount}}</span></p>
+        </div>
+        <div class="card-footer">
+        <button class="btn btn-primary" (click)='deleteList(country.countryId)' [disabled]='buttonCheck'>Delete</button>       
+        </div>       
+      </div> -->
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Record</th>
+            <th scope="col">Authority/Entity</th>
+            <th scope="col">Number of Approvals</th>
+            <th scope="col">Documents Required</th>
+            <th scope="col">Actual Documents Required</th>
+            <th scope="col">Actions</th>
+            <th scope="col">From Clients</th>
+          </tr>
+        </thead>
+        <tbody>
+      <ng-container *ngFor="let archCorp of archCorpLists; let i = index">
+          <tr>
+            <th scope="row">{{i + 1}}</th>
+            <td>{{archCorp.authority}}</td>
+            <td>{{archCorp.noOfApprovals}}</td>
+            <td>{{archCorp.documentRequirements}}</td>
+            <td>{{archCorp.actualDocumentRequirements}}</td>
+            <td><button class="btn btn-primary" (click)="editValues(archCorp)" data-toggle="modal" data-target="#exampleModal" type="button">EDIT</button> &nbsp;&nbsp;<button class="btn btn-warning" (click)="deleteList(archCorp.archCorpId)">DELETE</button></td>
+            <td>{{archCorp.fromClient}}</td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+
+      <br/>
+    
+  <!-- </div> 
+  </div> -->
+
+<!-- </div> -->
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create A Record</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #CreateForm="ngForm" (ngSubmit)="createRecord()">
+          <div class="form-group">
+              <div class="row">
+                  <div class="col">
+            <label  class="col-form-label">Authority/Entity:</label>
+
+            <input class="form-control" type="text" [(ngModel)]="authority" name="authority"
+                        #authorityval="ngModel" required>
+                    </div>  
+                    <div class="col">
+                        <label  class="col-form-label">Number Of Approvals:</label>
+            
+                        <input class="form-control" type="number" [(ngModel)]="noOfApprovals" name="noOfApprovals"
+                                    #noOfApproval="ngModel" required>
+                                </div>   
+                </div>
+          </div>
+          <div class="form-group">
+            <label>Documents Required</label>
+            <input type="text" class="form-control" name="reqDocuments" [(ngModel)]="reqDocuments" #rdocs="ngModel"
+            placeholder='Required Documents'  required>
+          </div>
+          <div class="form-group">
+            <label>Actual Documents Required</label>
+            <input type='text' class="form-control" name="actDocuments" [(ngModel)]="actDocuments"
+                #aDocs='ngModel' placeholder='Actual Documents' required>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-9">
+                <label>Client</label>
+               <input type='text' class="form-control" name="client" [(ngModel)]="client"
+                #Client="ngModel" placeholder='client' required>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]='!CreateForm.form.valid' >Create</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -48,7 +48,7 @@ this.router.navigate(['/signup']);
             this.toastr.successToastr("Login Successful!!1");
   
             setTimeout(()=>{
-            this.router.navigate(['/landing']);
+            this.router.navigate(['/archcorp']);
             },2000);
           }
           else{

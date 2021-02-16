@@ -59,4 +59,21 @@ return this.http.post(`${this.BaseUrl}/flight/createflight`, data);
     let data = {};
     return this.http.post(`${this.BaseUrl}/flight/delete/${countryId}/${authToken}`, data);
   }
+
+  public getAllRecords(data):Observable<any> {
+    return this.http.post(`${this.BaseUrl}/archcorp/getall`, data);
+  }
+
+  public deleteArchCorpList(Id, authToken):Observable<any> {
+    let data = {};
+    return this.http.post(`${this.BaseUrl}/archcorp/delete/${Id}/${authToken}`, data);
+  }
+
+  public createArchCorpList(data):Observable<any> {
+    return this.http.post(`${this.BaseUrl}/archcorp/createRecord`, data);
+      }
+
+      public editArchCorpList(data, id):Observable<any> {
+        return this.http.post(`${this.BaseUrl}/archcorp/${id}/editRecord`, data);
+          }      
 }
